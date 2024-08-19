@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.child1{
+    margin-left:850px;
+}
+.line{
+    text-decoration:overline;
+    border: 1px solid black;
+}
+ .child3 h4,.main5 h4,.main6 h4{
+    text-decoration:underline;
+ }
+ .main5 th,td,.main6 th,td{
+    border: 1px solid black;
+ }
+ .container{
+    padding: 10px;
+    border: 5px double black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+ }
+ .child{
+    margin-left: 40px;
+    margin-top: 20px;
+ }
+ .main1 h4,.main2 h4,.main3 h4{
+    text-decoration:underline;
+ }

@@ -1,0 +1,19 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+input{
+    width: 250px;
+    margin: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+b{
+   width: 70px;
+   display:inline-block;
+}
+
+body{
+    background-image: url(logo/530ab7d8519f56c819000955_ocean-rocks.jpg);
+}
