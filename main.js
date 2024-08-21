@@ -60,6 +60,7 @@ function login(){
         }
     }
     if(a==true){
+        localStorage.setItem("logged","true")
         alert("successfully logged in")
         window.location="resume.html"
     }
@@ -72,7 +73,10 @@ function login(){
 
 }
 
-
+function logout(){
+    localStorage.removeItem('logged')
+    window.location='login.html'
+}
 
 
 
@@ -243,7 +247,10 @@ function deLete(index,idname,key,first,second,third,fourth,fifth){
 }
 
 
-
+function list(){
+     localStorage.removeItem('logged')
+    window.location='resumelist.html'
+}
 
 
 
@@ -254,10 +261,14 @@ if(!localStorage.getItem('resume_list')){
 
  let str_list= JSON.parse(localStorage.getItem("resume_list"))
 function myfunction(){
+    
     str_list.push(resume)
     localStorage.setItem("resume_list",JSON.stringify(str_list))
     window.location="resumelist.html"
 }
+
+
+
 
 
 

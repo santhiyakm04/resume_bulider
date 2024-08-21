@@ -12,11 +12,15 @@
 
         <div class="container">
             <div class="main">
-                <div class="child">
+                <!-- <div class="child">
                     <a href="login.html" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-log-out"></span>Logout
                       </a>
-                      </div>
+                      </div> -->
+                      <div class="child">
+                        <button class="btn btn-info" onclick="list()">list</button>
+                      <button class="btn btn-info" onclick="logout()">logout</button>
+                    </div>
 
                 </h1>
                 <h1>Resume</h1>
@@ -166,5 +170,12 @@
     
 </body>
 <script src="main.js"></script>
+<script>
+    let logged=localStorage.getItem('logged')
+
+    if(!logged){
+        window.location='login.html'
+    }
+</script>
 
 </html>

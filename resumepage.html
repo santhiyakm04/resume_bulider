@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <button class="btn btn-info" onclick="logout()">Logout</button>
     <div class="container bg-color:whitesmoke">
         <div class="child">
         <h1 id="id1_name">Name</h1>
@@ -161,5 +162,12 @@
         }
     
     document.getElementById('pro').innerHTML=d
+
+
+    function logout(){
+    localStorage.removeItem('logged')
+    window.location='login.html'
+}
+
 </script>
 </html>
