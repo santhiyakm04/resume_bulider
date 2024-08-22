@@ -1,6 +1,6 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-  import { addDoc,collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  import { getFirestore,addDoc,collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyBTdXm0pekS8GqBxS6GZnRyL74atvz_39g",
     authDomain: "resume-builder-66a58.firebaseapp.com",
@@ -11,13 +11,12 @@
   };
   const app = initializeApp(firebaseConfig);
 
-//   const db=getFirestore(app)
+  const db=getFirestore(app)
 
 async function register_new(){
     let name=document.getElementById("name").value
     let email=document.getElementById("email").value
     let password=document.getElementById("pass").value
-
 
 
 await addDoc(collection(db,"register page"),{
