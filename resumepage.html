@@ -94,77 +94,7 @@
 </body>
 <script src="main.js"></script>
 <script>
-     const searchParams = new URLSearchParams(window.location.search); 
-    const indexParam = searchParams.get('index'); 
-     
-    const ls_data = JSON.parse(localStorage.getItem('resume_list'))
-    document.getElementById('id1_name').innerHTML=ls_data[indexParam].name
-    document.getElementById('id2_name').innerHTML=ls_data[indexParam].email
-    document.getElementById('id3_name').innerHTML=ls_data[indexParam].phoneno
-    document.getElementById('id4_name').innerHTML=ls_data[indexParam].address
-    document.getElementById('id5_name').innerHTML=ls_data[indexParam].objective
-
-    document.getElementById('id7_name').innerHTML=ls_data[indexParam].personal_details.language
-    document.getElementById('id11_name').innerHTML=ls_data[indexParam].personal_details.dateofbirth
-    document.getElementById('id12_name').innerHTML=ls_data[indexParam].personal_details.gender
-    document.getElementById('id13_name').innerHTML=ls_data[indexParam].personal_details.fathername
-    document.getElementById('id14_name').innerHTML=ls_data[indexParam].personal_details.mothername
-    document.getElementById('id15_name').innerHTML=ls_data[indexParam].personal_details.maritalstatus
-    document.getElementById('id16_name').innerHTML=ls_data[indexParam].personal_details.nationality
-
-
-
-
-
-
-    let a=""
-    for(let n of ls_data[indexParam].skills){
-        a=a+`<li>${n}</li>`
-    }
-    document.getElementById('add').innerHTML=a
-
-
-    
-        let b=""
-        for(let each in ls_data[indexParam].educations){
-            b=b+`<tr>
-                <td>${ls_data[indexParam].educations[each].education}</td>
-                <td>${ls_data[indexParam].educations[each].institute}</td>
-                <td>${ls_data[indexParam].educations[each].place}</td>
-                <td>${ls_data[indexParam].educations[each].percentage}</td>
-                <td>${ls_data[indexParam].educations[each].passingyear}</td>
-                </tr>`
-        }
-    
-    document.getElementById('edu').innerHTML=b
-
-
-
-   
-    let c=""
-        for(let each in ls_data[indexParam].work_experience){
-            c=c+`<tr>
-                <td>${ls_data[indexParam].work_experience[each].company}</td>
-                <td>${ls_data[indexParam].work_experience[each].year}</td>
-                <td>${ls_data[indexParam].work_experience[each].details}</td>
-                </tr>`
-        }
-    
-    document.getElementById('work').innerHTML=c
-
-    
-    let d=""
-        for(let each in ls_data[indexParam].projects){
-            d=d+`<tr>
-                <td>${ls_data[indexParam].projects[each].projectname}</td>
-                <td>${ls_data[indexParam].projects[each].platform}</td>
-                <td>${ls_data[indexParam].projects[each].discription}</td>
-                </tr>`
-        }
-    
-    document.getElementById('pro').innerHTML=d
-</script>
-<script>
+    page()
      let logged=localStorage.getItem('logged')
     if(!logged){
         window.location='login.html'
