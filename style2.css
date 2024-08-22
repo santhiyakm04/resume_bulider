@@ -3,11 +3,11 @@
     padding: 0;
 }
 .child1{
-    margin-left:850px;
+display: flex;
+margin-left: 300px;
 }
-.line{
-    text-decoration:overline;
-    border: 1px solid black;
+hr{
+   opacity:10.5;
 }
  .child3 h4,.main5 h4,.main6 h4{
     text-decoration:underline;
@@ -20,10 +20,11 @@
     border: 5px double black;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: beige;
  }
  .child{
-    margin-left: 40px;
-    margin-top: 20px;
+    margin-left: 490px;
+    margin-bottom: 20px;
  }
  .main1 h4,.main2 h4,.main3 h4{
     text-decoration:underline;
@@ -36,6 +37,4 @@
    width: 200px;
    display: inline-block;
  }
- body{
-   background-color: beige;
- }
+
