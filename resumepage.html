@@ -92,6 +92,7 @@
     </div>
    
 </body>
+<script src="main.js"></script>
 <script>
      const searchParams = new URLSearchParams(window.location.search); 
     const indexParam = searchParams.get('index'); 
@@ -162,12 +163,11 @@
         }
     
     document.getElementById('pro').innerHTML=d
-
-
-    function logout(){
-    localStorage.removeItem('logged')
-    window.location='login.html'
-}
-
+</script>
+<script>
+     let logged=localStorage.getItem('logged')
+    if(!logged){
+        window.location='login.html'
+    }
 </script>
 </html>

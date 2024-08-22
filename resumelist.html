@@ -31,5 +31,10 @@
 <script src="main.js"></script>
 <script>
    display()
+   let logged=localStorage.getItem('logged')
+    if(!logged){
+        window.location='login.html'
+    }
 </script>
+
 </html>

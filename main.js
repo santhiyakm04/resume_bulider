@@ -247,10 +247,7 @@ function deLete(index,idname,key,first,second,third,fourth,fifth){
 }
 
 
-function list(){
-     localStorage.removeItem('logged')
-    window.location='resumelist.html'
-}
+
 
 
 
