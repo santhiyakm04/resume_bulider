@@ -23,8 +23,11 @@ hr{
     background-color: beige;
  }
  .child{
-    margin-left: 490px;
-    margin-bottom: 20px;
+    margin-left: 480px;
+    margin-bottom: 10px;
+ }
+.box{
+   margin-left: 450px;
  }
  .main1 h4,.main2 h4,.main3 h4{
     text-decoration:underline;
