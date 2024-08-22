@@ -1,11 +1,49 @@
-if(!localStorage.getItem('user-details')){
-    localStorage.setItem('user-details',JSON.stringify([]))
-}
-let details=JSON.parse(localStorage.getItem("user-details"))
-function register(){
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { addDoc,collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyBTdXm0pekS8GqBxS6GZnRyL74atvz_39g",
+    authDomain: "resume-builder-66a58.firebaseapp.com",
+    projectId: "resume-builder-66a58",
+    storageBucket: "resume-builder-66a58.appspot.com",
+    messagingSenderId: "600180128559",
+    appId: "1:600180128559:web:474506a73cbdfa41047fda"
+  };
+  const app = initializeApp(firebaseConfig);
+
+//   const db=getFirestore(app)
+
+async function register_new(){
     let name=document.getElementById("name").value
     let email=document.getElementById("email").value
     let password=document.getElementById("pass").value
+
+
+
+await addDoc(collection(db,"register page"),{
+    email:email,
+    name:name,
+    password:password
+})
+}
+window.register_new=register_new
+
+
+
+
+
+
+
+
+
+if(!localStorage.getItem('user-details')){
+    localStorage.setItem('user-details',JSON.stringify([]))
+}
+// let details=JSON.parse(localStorage.getItem("user-details"))
+// function register(){
+//     let name=document.getElementById("name").value
+//     let email=document.getElementById("email").value
+//     let password=document.getElementById("pass").value
     // let object={};
     // object.name=name
     // object.email=email
@@ -17,34 +55,34 @@ function register(){
     // document.getElementById("email").value=""
     // document.getElementById("pass").value=""
     // window.location="login.html"
-    let c=false
- let d=JSON.parse(localStorage.getItem("user-details"))
-    for(let n of d){
-        if(n.name==name && n.email==email &&n.password==password){
-            c=true}
+//     let c=false
+//  let d=JSON.parse(localStorage.getItem("user-details"))
+//     for(let n of d){
+//         if(n.name==name && n.email==email &&n.password==password){
+//             c=true}
             
-        }
-        if(c==true){
-            alert("you are already registered")
-            window.location="login.html"
-        }
-        else{
-            let object={};
-            object.name=name
-            object.email=email
-            object.password=password
+//         }
+//         if(c==true){
+//             alert("you are already registered")
+//             window.location="login.html"
+//         }
+//         else{
+//             let object={};
+//             object.name=name
+//             object.email=email
+//             object.password=password
         
-            details.push(object)
-            localStorage.setItem('user-details',JSON.stringify(details))
-            document.getElementById("name").value=""
-            document.getElementById("email").value=""
-            document.getElementById("pass").value=""
-            alert("registered successfully")
-            window.location="login.html"
+//             details.push(object)
+//             localStorage.setItem('user-details',JSON.stringify(details))
+//             document.getElementById("name").value=""
+//             document.getElementById("email").value=""
+//             document.getElementById("pass").value=""
+//             alert("registered successfully")
+//             window.location="login.html"
             
-        }
+//         }
         
-    }
+//     }
 
 
 
