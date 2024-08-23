@@ -1,13 +1,14 @@
 
+  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
   import { getFirestore,addDoc,collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
   const firebaseConfig = {
-    apiKey: "AIzaSyBTdXm0pekS8GqBxS6GZnRyL74atvz_39g",
-    authDomain: "resume-builder-66a58.firebaseapp.com",
-    projectId: "resume-builder-66a58",
-    storageBucket: "resume-builder-66a58.appspot.com",
-    messagingSenderId: "600180128559",
-    appId: "1:600180128559:web:474506a73cbdfa41047fda"
+    apiKey: "AIzaSyCiNMBuzO8wRBQ3LSYnRU72lfW9Q9q95t0",
+    authDomain: "resume-builder-4e98e.firebaseapp.com",
+    projectId: "resume-builder-4e98e",
+    storageBucket: "resume-builder-4e98e.appspot.com",
+    messagingSenderId: "715390569378",
+    appId: "1:715390569378:web:6d4c24eebb1788536a80fb"
   };
   const app = initializeApp(firebaseConfig);
 
@@ -19,7 +20,7 @@ async function register_new(){
     let password=document.getElementById("pass").value
 
 
-await addDoc(collection(db,"register page"),{
+await addDoc(collection(db,"register"),{
     email:email,
     name:name,
     password:password
