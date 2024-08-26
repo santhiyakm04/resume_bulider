@@ -36,9 +36,9 @@ window.register_new=register_new
 
 
 
-if(!localStorage.getItem('user-details')){
-    localStorage.setItem('user-details',JSON.stringify([]))
-}
+// if(!localStorage.getItem('user-details')){
+//     localStorage.setItem('user-details',JSON.stringify([]))
+// }
 // let details=JSON.parse(localStorage.getItem("user-details"))
 // function register(){
 //     let name=document.getElementById("name").value
@@ -110,12 +110,13 @@ function login(){
     document.getElementById('pass').value=""
 
 }
+window.login=login
 
 function logout(){
     localStorage.removeItem('logged')
     window.location='login.html'
 }
-
+window.logout=logout
 
 
 
@@ -143,7 +144,7 @@ function test(e, key, p_key) {
         resume[key] = e.value
     }
 }
-
+window.test=test
 
 
 function addList(id, key, p_key) {
@@ -157,7 +158,7 @@ function addList(id, key, p_key) {
     document.getElementById(id).value = "";
     addskill(key,p_key)
 }
-
+window.addList=addList
 
 
 
@@ -201,7 +202,7 @@ if(p_keyname){
 }
 addskill(keyname,p_keyname)
 }
-
+window.adddelete=adddelete
 
 
 
@@ -238,7 +239,7 @@ function edu(key,id, firstparam, secondparam, thirdparam, fourthparam, fifthpara
     view(key,id,firstparam,secondparam,thirdparam,fourthparam,fifthparam)
 
 }
-
+window.edu=edu
 
 
 
@@ -283,29 +284,24 @@ function deLete(index,idname,key,first,second,third,fourth,fifth){
     resume[key]=new_list
     view(key,idname,first,second,third,fourth,fifth)
 }
+window.deLete=deLete
 
 
 
 
 
 
+// if(!localStorage.getItem('resume_list')){
+//     localStorage.setItem('resume_list',JSON.stringify([]))
+// }
 
-if(!localStorage.getItem('resume_list')){
-    localStorage.setItem('resume_list',JSON.stringify([]))
+//  let str_list= JSON.parse(localStorage.getItem("resume_list"))
+async function myfunction(){
+    await addDoc(collection(db,"user_resume"),{
+      resume
+    })
 }
-
- let str_list= JSON.parse(localStorage.getItem("resume_list"))
-function myfunction(){
-    
-    str_list.push(resume)
-    localStorage.setItem("resume_list",JSON.stringify(str_list))
-    window.location="resumelist.html"
-}
-
-
-
-
-
+window.myfunction=myfunction
 
 
  variable=localStorage.getItem("email")
@@ -338,7 +334,7 @@ let b=JSON.parse(localStorage.getItem("resume_list"))
      localStorage.setItem("resume_list",JSON.stringify(new_value))
      display()
  }
-
+window.delete_fun=delete_fun
 
 function searchparm(){
     const searchParams = new URLSearchParams(window.location.search); 
@@ -348,7 +344,7 @@ function searchparm(){
     document.getElementById('id_name').innerHTML=ls_data[indexParam].name
 
 }
-
+window. searchparm= searchparm
 function page(){
     const searchParams = new URLSearchParams(window.location.search); 
     const indexParam = searchParams.get('index'); 
@@ -420,4 +416,5 @@ function page(){
     
     document.getElementById('pro').innerHTML=d
 }
+window.page=page
                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
