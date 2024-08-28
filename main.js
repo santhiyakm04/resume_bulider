@@ -1,7 +1,5 @@
-
-  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-  import { getFirestore,addDoc,collection } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  import { getFirestore,addDoc,collection,getDocs,query,deleteDoc,doc} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyCiNMBuzO8wRBQ3LSYnRU72lfW9Q9q95t0",
     authDomain: "resume-builder-4e98e.firebaseapp.com",
@@ -24,10 +22,16 @@ await addDoc(collection(db,"register"),{
     email:email,
     name:name,
     password:password
-})
-}
+})}
 window.register_new=register_new
-
+let eachresume=[]
+getDocs(query(collection(db,"register"))).then(docSnap=>{
+     docSnap.forEach((each,i)=>{
+     eachresume.push(each.data())
+     console.log(eachresume)
+     })
+    })
+    // alert("register successfully")
 
 
 
@@ -91,24 +95,23 @@ function login(){
     let email1=document.getElementById('email').value
     let pass1=document.getElementById('pass').value
     let a=false
-    let b=JSON.parse(localStorage.getItem("user-details"))
-    for(let n of b){
-        if(n.email==email1 && n.password==pass1){
+    // let b=JSON.parse(localStorage.getItem("user-details"))
+    for(let n in eachresume){
+        if(email1==eachresume[n].email && pass1==eachresume[n].password){
             a=true
         }
     }
     if(a==true){
-        localStorage.setItem("logged","true")
+        // localStorage.setItem("logged","true")
         alert("successfully logged in")
         window.location="resume.html"
     }
     else{
         alert("wrong")
     }
-    localStorage.setItem('email',email1)
+    // localStorage.setItem('email',email1)
     document.getElementById('email').value=""
     document.getElementById('pass').value=""
-
 }
 window.login=login
 
@@ -297,44 +300,46 @@ window.deLete=deLete
 
 //  let str_list= JSON.parse(localStorage.getItem("resume_list"))
 async function myfunction(){
-    await addDoc(collection(db,"user_resume"),{
+    await addDoc(collection(db,"user_resume"),
       resume
-    })
+    )
 }
 window.myfunction=myfunction
 
 
- variable=localStorage.getItem("email")
-let b=JSON.parse(localStorage.getItem("resume_list"))
+//  variable=localStorage.getItem("email")
+// let b=JSON.parse(localStorage.getItem("resume_list"))
  function display(){
-    let user_list="";
-    for(let each in b){
-        if(b[each].adminid==variable){
+    getDocs(query(collection(db,"user_resume"))).then(docSnap=>{
+        let user_list="";
+        docSnap.forEach((each,i)=>{
+       let eachresume=each.data()
+    //    console.log(eachresume)
             user_list=user_list+`<tr>
-        <td>${b[each].name}</td>
-        <td>${b[each].email}</td>
-        <td>${b[each].phoneno}</td>
-        <td><button onclick="delete_fun(${each})">Delete</button></td>
-         <td><a href="resumepage.html?index=${each}"<button>viewpage</button></a></td>
+        <td>${eachresume.name}</td>
+        <td>${eachresume.email}</td>
+        <td>${eachresume.phoneno}</td>
+        <td><button onclick="delete_fun('${each.id}')">Delete</button></td>
+         <td><a href="resumepage.html?index=('${each.id}')"<button>viewpage</button></a></td>
          </tr>`
-        }
-        }
+        })
         document.getElementById('list').innerHTML=user_list
- }
+    })
+    }
+window.display=display
+
+
 
  
- function delete_fun(index){
-     let new_value=[];
-     for(let e in b){
-        if(e!=index){
-            new_value.push(b[e])
-        }
-     }
-     b=new_value
-     localStorage.setItem("resume_list",JSON.stringify(new_value))
+ function delete_fun(eachresume){
+    deleteDoc(doc(db,"user_resume",eachresume))
      display()
  }
 window.delete_fun=delete_fun
+
+
+
+
 
 function searchparm(){
     const searchParams = new URLSearchParams(window.location.search); 
