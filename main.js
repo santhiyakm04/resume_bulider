@@ -1,5 +1,5 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-  import { getFirestore,addDoc,collection,getDocs,query,deleteDoc,doc} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  import { getFirestore,addDoc,collection,getDocs,query,deleteDoc,doc,where} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyCiNMBuzO8wRBQ3LSYnRU72lfW9Q9q95t0",
     authDomain: "resume-builder-4e98e.firebaseapp.com",
@@ -13,17 +13,35 @@
   const db=getFirestore(app)
 
 async function register_new(){
+    getDocs(query(collection(db,"register"))).then(docSnap=>{
+        docSnap.forEach((each,i)=>{
+        eachresume.push(each.data())
+        })
+       })
     let name=document.getElementById("name").value
     let email=document.getElementById("email").value
     let password=document.getElementById("pass").value
-
-
-await addDoc(collection(db,"register"),{
-    email:email,
-    name:name,
-    password:password
-})}
+  let a=false
+  for(let n of eachresume){
+    if(n.name==name&&n.email==email&&n.password==password){
+        a=true
+    }}if(a==true){
+     alert("you are already registered")
+    }
+     else {
+        await addDoc(collection(db,"register"),{
+            email:email,
+            name:name,
+            password:password
+        })
+        alert("register successfully")
+     }
+     window.location="login.html"
+}
 window.register_new=register_new
+
+
+
 let eachresume=[]
 getDocs(query(collection(db,"register"))).then(docSnap=>{
      docSnap.forEach((each,i)=>{
@@ -31,8 +49,6 @@ getDocs(query(collection(db,"register"))).then(docSnap=>{
      console.log(eachresume)
      })
     })
-    // alert("register successfully")
-
 
 
 
@@ -102,9 +118,12 @@ function login(){
         }
     }
     if(a==true){
-        // localStorage.setItem("logged","true")
+        localStorage.setItem("email",email1)
         alert("successfully logged in")
+        localStorage.setItem('logged',"true")
         window.location="resume.html"
+        // localStorage.setItem('logged')
+
     }
     else{
         alert("wrong")
@@ -115,12 +134,13 @@ function login(){
 }
 window.login=login
 
+
+
 function logout(){
     localStorage.removeItem('logged')
     window.location='login.html'
 }
 window.logout=logout
-
 
 
 
@@ -306,11 +326,8 @@ async function myfunction(){
 }
 window.myfunction=myfunction
 
-
-//  variable=localStorage.getItem("email")
-// let b=JSON.parse(localStorage.getItem("resume_list"))
  function display(){
-    getDocs(query(collection(db,"user_resume"))).then(docSnap=>{
+    getDocs(query(collection(db,"user_resume"),where('adminid','==',variable))).then(docSnap=>{
         let user_list="";
         docSnap.forEach((each,i)=>{
        let eachresume=each.data()
@@ -320,7 +337,7 @@ window.myfunction=myfunction
         <td>${eachresume.email}</td>
         <td>${eachresume.phoneno}</td>
         <td><button onclick="delete_fun('${each.id}')">Delete</button></td>
-         <td><a href="resumepage.html?index=('${each.id}')"<button>viewpage</button></a></td>
+         <td><a href="resumepage.html?index=('${each.id}')"</a><button>viewpage</button></td>
          </tr>`
         })
         document.getElementById('list').innerHTML=user_list
@@ -351,75 +368,81 @@ function searchparm(){
 }
 window. searchparm= searchparm
 function page(){
-    const searchParams = new URLSearchParams(window.location.search); 
-    const indexParam = searchParams.get('index'); 
+    getDocs(query(collection(db,"user_resume"))).then(docSnap=>{
+        docSnap.forEach((each,i)=>{
+      let eachresume=(each.data())
+      console.log(eachresume)
+    })})
+    
+//     const searchParams = new URLSearchParams(window.location.search); 
+//     const indexParam = searchParams.get('index'); 
      
-    const ls_data = JSON.parse(localStorage.getItem('resume_list'))
-    document.getElementById('id1_name').innerHTML=ls_data[indexParam].name
-    document.getElementById('id2_name').innerHTML=ls_data[indexParam].email
-    document.getElementById('id3_name').innerHTML=ls_data[indexParam].phoneno
-    document.getElementById('id4_name').innerHTML=ls_data[indexParam].address
-    document.getElementById('id5_name').innerHTML=ls_data[indexParam].objective
+//     const ls_data = JSON.parse(localStorage.getItem('resume_list'))
+//     document.getElementById('id1_name').innerHTML=ls_data[indexParam].name
+//     document.getElementById('id2_name').innerHTML=ls_data[indexParam].email
+//     document.getElementById('id3_name').innerHTML=ls_data[indexParam].phoneno
+//     document.getElementById('id4_name').innerHTML=ls_data[indexParam].address
+//     document.getElementById('id5_name').innerHTML=ls_data[indexParam].objective
 
-    document.getElementById('id7_name').innerHTML=ls_data[indexParam].personal_details.language
-    document.getElementById('id11_name').innerHTML=ls_data[indexParam].personal_details.dateofbirth
-    document.getElementById('id12_name').innerHTML=ls_data[indexParam].personal_details.gender
-    document.getElementById('id13_name').innerHTML=ls_data[indexParam].personal_details.fathername
-    document.getElementById('id14_name').innerHTML=ls_data[indexParam].personal_details.mothername
-    document.getElementById('id15_name').innerHTML=ls_data[indexParam].personal_details.maritalstatus
-    document.getElementById('id16_name').innerHTML=ls_data[indexParam].personal_details.nationality
-
-
+//     document.getElementById('id7_name').innerHTML=ls_data[indexParam].personal_details.language
+//     document.getElementById('id11_name').innerHTML=ls_data[indexParam].personal_details.dateofbirth
+//     document.getElementById('id12_name').innerHTML=ls_data[indexParam].personal_details.gender
+//     document.getElementById('id13_name').innerHTML=ls_data[indexParam].personal_details.fathername
+//     document.getElementById('id14_name').innerHTML=ls_data[indexParam].personal_details.mothername
+//     document.getElementById('id15_name').innerHTML=ls_data[indexParam].personal_details.maritalstatus
+//     document.getElementById('id16_name').innerHTML=ls_data[indexParam].personal_details.nationality
 
 
 
 
-    let a=""
-    for(let n of ls_data[indexParam].skills){
-        a=a+`<li>${n}</li>`
-    }
-    document.getElementById('add').innerHTML=a
+
+
+//     let a=""
+//     for(let n of ls_data[indexParam].skills){
+//         a=a+`<li>${n}</li>`
+//     }
+//     document.getElementById('add').innerHTML=a
 
 
     
-        let b=""
-        for(let each in ls_data[indexParam].educations){
-            b=b+`<tr>
-                <td>${ls_data[indexParam].educations[each].education}</td>
-                <td>${ls_data[indexParam].educations[each].institute}</td>
-                <td>${ls_data[indexParam].educations[each].place}</td>
-                <td>${ls_data[indexParam].educations[each].percentage}</td>
-                <td>${ls_data[indexParam].educations[each].passingyear}</td>
-                </tr>`
-        }
+//         let b=""
+//         for(let each in ls_data[indexParam].educations){
+//             b=b+`<tr>
+//                 <td>${ls_data[indexParam].educations[each].education}</td>
+//                 <td>${ls_data[indexParam].educations[each].institute}</td>
+//                 <td>${ls_data[indexParam].educations[each].place}</td>
+//                 <td>${ls_data[indexParam].educations[each].percentage}</td>
+//                 <td>${ls_data[indexParam].educations[each].passingyear}</td>
+//                 </tr>`
+//         }
     
-    document.getElementById('edu').innerHTML=b
+//     document.getElementById('edu').innerHTML=b
 
 
 
    
-    let c=""
-        for(let each in ls_data[indexParam].work_experience){
-            c=c+`<tr>
-                <td>${ls_data[indexParam].work_experience[each].company}</td>
-                <td>${ls_data[indexParam].work_experience[each].year}</td>
-                <td>${ls_data[indexParam].work_experience[each].details}</td>
-                </tr>`
-        }
+//     let c=""
+//         for(let each in ls_data[indexParam].work_experience){
+//             c=c+`<tr>
+//                 <td>${ls_data[indexParam].work_experience[each].company}</td>
+//                 <td>${ls_data[indexParam].work_experience[each].year}</td>
+//                 <td>${ls_data[indexParam].work_experience[each].details}</td>
+//                 </tr>`
+//         }
     
-    document.getElementById('work').innerHTML=c
+//     document.getElementById('work').innerHTML=c
 
     
-    let d=""
-        for(let each in ls_data[indexParam].projects){
-            d=d+`<tr>
-                <td>${ls_data[indexParam].projects[each].projectname}</td>
-                <td>${ls_data[indexParam].projects[each].platform}</td>
-                <td>${ls_data[indexParam].projects[each].discription}</td>
-                </tr>`
-        }
+//     let d=""
+//         for(let each in ls_data[indexParam].projects){
+//             d=d+`<tr>
+//                 <td>${ls_data[indexParam].projects[each].projectname}</td>
+//                 <td>${ls_data[indexParam].projects[each].platform}</td>
+//                 <td>${ls_data[indexParam].projects[each].discription}</td>
+//                 </tr>`
+//         }
     
-    document.getElementById('pro').innerHTML=d
+//     document.getElementById('pro').innerHTML=d
 }
 window.page=page
                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
